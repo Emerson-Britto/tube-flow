@@ -1,5 +1,8 @@
+#!/bin/env python3
+
 from pytube import YouTube
 
+FOLDER = "downloads"
 
 video_url = input("Enter the video url: ")
 if video_url in ["cancel", "exit", "quit", "leave"]: quit()
@@ -17,10 +20,10 @@ elif media_type == "video":
 	resolutions = [(idx, stream.resolution) for idx, stream in enumerate(streams)]
 	resolution = resolutions[int(input(f"pick some of these resolution by index {resolutions}: "))][1]
 	target_stream = streams.filter(res=resolution)[0]
-	target_stream.download()
+	target_stream.download(FOLDER)
 else:
 	streams = streams.filter(mime_type="audio/mp4")
 	abrs = [(idx, stream.abr) for idx, stream in enumerate(streams)]
 	abr = abrs[int(input(f"pick some of these frequence by index {abrs}: "))][1]
 	target_stream = streams.filter(abr=abr)[0]
-	target_stream.download()
+	target_stream.download(FOLDER)
